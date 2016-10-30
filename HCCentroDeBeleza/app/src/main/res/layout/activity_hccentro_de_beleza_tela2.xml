@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Fullscreen"
-    tools:context=".activity.HCCentroDeBelezaTela1"
-    tools:ignore="MergeRootFrame">
+    tools:context=".activity.HCCentroDeBelezaTela2">
 
-    <ImageView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvListTela2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:background="@drawable/splash" />
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

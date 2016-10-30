@@ -8,13 +8,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HCCentroDeBelezaTela1">
+        <activity
+            android:name=".activity.HCCentroDeBelezaTela1"
+            android:screenOrientation="portrait"
+            android:theme="@style/Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.HCCentroDeBelezaTela2"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
