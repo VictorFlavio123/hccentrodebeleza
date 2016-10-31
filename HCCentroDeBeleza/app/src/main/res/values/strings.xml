@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HCCentroDeBeleza</string>
+    <string name="nome">Nome</string>
+    <string name="salvar_cadastro">Salvar cadastro</string>
+    <string name="email">E-mail</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="salvar_reserva">Salvar reserva</string>
+    <string name="reserva">Reserva</string>
 </resources>

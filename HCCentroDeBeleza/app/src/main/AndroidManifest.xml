@@ -21,6 +21,8 @@
         <activity
             android:name=".activity.HCCentroDeBelezaTela2"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.HCCentroDeBelezaTela3" />
+        <activity android:name=".activity.HCCentroDeBelezaTela4"></activity>
     </application>
 
 </manifest>
