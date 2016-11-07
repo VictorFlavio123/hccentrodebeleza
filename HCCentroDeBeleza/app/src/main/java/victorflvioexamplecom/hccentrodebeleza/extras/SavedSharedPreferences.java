@@ -13,7 +13,7 @@ public class SavedSharedPreferences {
     static final String PREF_NOME_USUARIO = "nome";
     static final String PREF_EMAIL_USUARIO = "email";
     static final String PREF_USUARIO_CADASTRADO = "cadastrado";
-    static final String PREF_NOME_SERVICO = "nome";
+    static final String PREF_NOME_SERVICO = "nome_servico";
     static final String PREF_SERVICO_ID = "id";
 
     static SharedPreferences getSharedPreferences(Context c) {
@@ -29,9 +29,9 @@ public class SavedSharedPreferences {
         editor.apply();
     }
 
-    public static void setNomeServico(Context c, String nome) {
+    public static void setNomeServico(Context c, String servico) {
         SharedPreferences.Editor editor = getSharedPreferences(c).edit();
-        editor.putString(PREF_NOME_SERVICO, nome);
+        editor.putString(PREF_NOME_SERVICO, servico);
         //editor.putLong(PREF_SERVICO_ID, id);
         editor.commit();
         editor.apply();

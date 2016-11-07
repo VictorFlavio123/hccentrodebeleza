@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -59,13 +60,6 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
 
         //Intent
         Bundle bundle = getIntent().getExtras();
-        String nome = "", email = "";
-        boolean cadastrado = false;
-        if (bundle != null) {
-            nome = bundle.getString("nomeUsuario");
-            email = bundle.getString("emailUsuario");
-            cadastrado = bundle.getBoolean("cadastrado");
-        }
 
         String nomeUsuario = SavedSharedPreferences.getNomeUsuario(this);
         String emailUsuario = SavedSharedPreferences.getEmailUsuario(this);
@@ -88,6 +82,7 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
                     )
                     .withSelectionListEnabledForSingleProfile(false)
                     .build();
+            Log.i("TAG", "onCreate: " + nomeUsuario);
         } else {
             mAccountHeader = new AccountHeaderBuilder()
                     .withActivity(this)
