@@ -13,10 +13,6 @@ import victorflvioexamplecom.hccentrodebeleza.R;
 import victorflvioexamplecom.hccentrodebeleza.interfaces.RecyclerViewOnClickListenerHack;
 import victorflvioexamplecom.hccentrodebeleza.model.Servicos;
 
-/**
- * Created by Filipi Andrade on 30/10/2016.
- */
-
 public class PrecosAdapter extends RecyclerView.Adapter<PrecosAdapter.PrecosViewHolder>{
 
     private Context mContext;

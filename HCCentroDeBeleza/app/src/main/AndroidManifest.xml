@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="victorflvioexamplecom.hccentrodebeleza">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,11 +20,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name=".FirebaseNotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGIN_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".FireIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".activity.HCCentroDeBelezaTela2"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.HCCentroDeBelezaTela3" />
-        <activity android:name=".activity.HCCentroDeBelezaTela4"></activity>
-    </application>
+        <activity
+            android:name=".activity.HCCentroDeBelezaTela3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HCCentroDeBelezaTela4"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HCCentroDeBelezaTela5"
+            android:screenOrientation="portrait" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <activity
+            android:name="victorflvioexamplecom.hccentrodebeleza.activity.MapsActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_maps" />
+    </application>
 </manifest>

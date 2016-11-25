@@ -14,6 +14,7 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
@@ -107,10 +108,11 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
                 .withSelectedItem(-1)
                 .withAccountHeader(mAccountHeader)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Nossos Serviços").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("Fazer Cadastro").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("Seus Horários").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)).withSelectable(false),
-                        new PrimaryDrawerItem().withName("Info").withIcon(getResources().getDrawable(R.mipmap.ic_launcher)).withSelectable(false)
+                        new PrimaryDrawerItem().withName("Nossos Serviços").withIcon(getResources().getDrawable(R.drawable.ic_briefcase_grey600_48dp)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("Fazer Cadastro").withIcon(getResources().getDrawable(R.drawable.ic_account_plus_grey600_48dp)).withSelectable(false),
+                        new PrimaryDrawerItem().withName("Seus Horários").withIcon(getResources().getDrawable(R.drawable.ic_clock_grey600_48dp)).withSelectable(false),
+                        new DividerDrawerItem(),
+                        new PrimaryDrawerItem().withName("Info").withIcon(getResources().getDrawable(R.drawable.ic_information_grey600_48dp)).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -123,8 +125,10 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
                                 startActivity(new Intent(HCCentroDeBelezaTela2.this, HCCentroDeBelezaTela3.class));
                                 break;
                             case 3:
+                                startActivity(new Intent(HCCentroDeBelezaTela2.this, HCCentroDeBelezaTela5.class));
                                 break;
-                            case 4:
+                            case 5:
+                                startActivity(new Intent(HCCentroDeBelezaTela2.this, MapsActivity.class));
                                 break;
                         }
                         return false;

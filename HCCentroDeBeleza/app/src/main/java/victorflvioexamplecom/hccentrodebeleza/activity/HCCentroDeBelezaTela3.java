@@ -13,7 +13,6 @@ import android.widget.Toast;
 import io.realm.RealmList;
 import victorflvioexamplecom.hccentrodebeleza.R;
 import victorflvioexamplecom.hccentrodebeleza.database.Database;
-import victorflvioexamplecom.hccentrodebeleza.extras.SavedSharedPreferences;
 import victorflvioexamplecom.hccentrodebeleza.model.Reserva;
 import victorflvioexamplecom.hccentrodebeleza.model.Usuario;
 
@@ -83,8 +82,6 @@ public class HCCentroDeBelezaTela3 extends AppCompatActivity implements View.OnC
                 Database.getInstance().addUsuario(usuario);
 
                 Toast.makeText(this, "Cadastro efetuado com sucesso!", Toast.LENGTH_SHORT).show();
-
-                SavedSharedPreferences.setInfoUser(this, mNome, mEmail, true);
 
                 startActivity(new Intent(this, HCCentroDeBelezaTela2.class)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)

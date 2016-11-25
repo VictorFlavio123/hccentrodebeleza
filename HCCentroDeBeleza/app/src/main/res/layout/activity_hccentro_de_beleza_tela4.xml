@@ -46,7 +46,8 @@
             <EditText
                 android:id="@+id/edtDataReservada"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:focusable="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +67,8 @@
             <EditText
                 android:id="@+id/edtHoraReservada"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:focusable="false" />
         </LinearLayout>
 
         <Button

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1054247802289",
+    "firebase_url": "https://hccentrodebeleza.firebaseio.com",
+    "project_id": "hccentrodebeleza",
+    "storage_bucket": "hccentrodebeleza.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054247802289:android:fc1a4f0a3dc39425",
+        "android_client_info": {
+          "package_name": "victorflvioexamplecom.hccentrodebeleza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054247802289-27geichrqq6odr9i320e53ded9c5begt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "victorflvioexamplecom.hccentrodebeleza",
+            "certificate_hash": "C6954C364536F1AFAEAEA4A3B5C84B12EA6E24BD"
+          }
+        },
+        {
+          "client_id": "1054247802289-ukqgm3ni9ocuscb6ia7jkm003q4qj3vg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPQ0UXt2XJb8leLjjCUlyt6l38xwZjRPc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054247802289-ukqgm3ni9ocuscb6ia7jkm003q4qj3vg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

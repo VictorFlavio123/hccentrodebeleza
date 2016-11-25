@@ -1,9 +1,5 @@
 package victorflvioexamplecom.hccentrodebeleza.model;
 
-/**
- * Created by Filipi Andrade on 30/10/2016.
- */
-
 public class Servicos {
 
     private String nome;

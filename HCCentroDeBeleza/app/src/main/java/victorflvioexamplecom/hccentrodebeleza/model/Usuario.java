@@ -4,10 +4,6 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by Filipi Andrade on 31/10/2016.
- */
-
 public class Usuario extends RealmObject {
 
     @PrimaryKey

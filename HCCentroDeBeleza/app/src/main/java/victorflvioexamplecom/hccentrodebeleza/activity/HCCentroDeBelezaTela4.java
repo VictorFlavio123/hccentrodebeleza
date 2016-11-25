@@ -11,13 +11,17 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import io.realm.RealmList;
 import victorflvioexamplecom.hccentrodebeleza.R;
+import victorflvioexamplecom.hccentrodebeleza.database.Database;
 import victorflvioexamplecom.hccentrodebeleza.extras.SavedSharedPreferences;
+import victorflvioexamplecom.hccentrodebeleza.model.Reserva;
 
 public class HCCentroDeBelezaTela4 extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,20 +46,38 @@ public class HCCentroDeBelezaTela4 extends AppCompatActivity implements View.OnC
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Inicializando o realm
+        Database.getInstance().setContext(this);
+
         mSimpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 
         edtNomeServico = (EditText) findViewById(R.id.edtNomeServico);
-        edtNomeServico.setText(SavedSharedPreferences.getNomeServico(this));
-
         edtDataReservada = (EditText) findViewById(R.id.edtDataReservada);
-        edtDataReservada.setSelected(false);
-        this.setDataTimeField();
-
         edtHoraReservada = (EditText) findViewById(R.id.edtHoraReservada);
-        edtDataReservada.setSelected(false);
-        this.setTimeField();
+
+        Bundle bundle = getIntent().getExtras();
+        boolean editar = false;
+        if (bundle != null) {
+            editar = bundle.getBoolean("editar");
+        }
+        if (editar) {
+            edtNomeServico.setText(SavedSharedPreferences.getNomeServico(this));
+            edtDataReservada.setText(SavedSharedPreferences.getDataServico(this));
+            edtDataReservada.setSelected(false);
+            this.setDataTimeField();
+            edtHoraReservada.setText(SavedSharedPreferences.getHoraServico(this));
+            edtHoraReservada.setSelected(false);
+            this.setTimeField();
+        } else {
+            edtNomeServico.setText(SavedSharedPreferences.getNomeServico(this));
+            edtDataReservada.setSelected(false);
+            this.setDataTimeField();
+            edtHoraReservada.setSelected(false);
+            this.setTimeField();
+        }
 
         btnSalvarReserva = (Button) findViewById(R.id.btnSalvarReserva);
+        btnSalvarReserva.setOnClickListener(this);
     }
 
     @Override
@@ -83,20 +105,51 @@ public class HCCentroDeBelezaTela4 extends AppCompatActivity implements View.OnC
             case R.id.edtHoraReservada:
                 mTimePickerDialog.show();
                 break;
+            case R.id.btnSalvarReserva:
+                Bundle bundle = getIntent().getExtras();
+                boolean editar = false;
+                int position = 0;
+                if (bundle != null) {
+                    editar = bundle.getBoolean("editar");
+                    position = bundle.getInt("position");
+                }
+
+                if (edtDataReservada.getText().length() == 0 || edtHoraReservada.getText().length() == 0) {
+                    Toast.makeText(this, "Campos vazios!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Reserva reserva = new Reserva();
+                    reserva.setNomeServico(edtNomeServico.getText().toString());
+                    reserva.setData(edtDataReservada.getText().toString());
+                    reserva.setHorario(edtHoraReservada.getText().toString());
+
+                    long id = SavedSharedPreferences.getIdUsuario(this);
+
+                    RealmList<Reserva> mReservas = Database.getInstance().getReservas(id);
+
+                    if (editar) {
+                        Database.getInstance().updateReserva(reserva, mReservas.get(position).getId(), position, mReservas);
+                    } else {
+                        Database.getInstance().makeReservation(reserva, id);
+                    }
+                    finish();
+                }
+                break;
         }
     }
 
     private void setTimeField() {
         edtHoraReservada.setOnClickListener(this);
         final Calendar calendar = Calendar.getInstance();
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:ss", Locale.US);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
         mTimePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                Calendar newTime = Calendar.getInstance(Locale.US);
-                newTime.set(Calendar.HOUR_OF_DAY, i);
-                newTime.set(Calendar.MINUTE, i1);
-                edtHoraReservada.setText(simpleDateFormat.format(newTime.getTime()));
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                if (selectedMinute <= 0 || selectedMinute < 10) {
+                    edtHoraReservada.setText(selectedHour + ":" + "0" + selectedMinute);
+                } else {
+                    edtHoraReservada.setText(selectedHour + ":" + selectedMinute);
+                }
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
     }

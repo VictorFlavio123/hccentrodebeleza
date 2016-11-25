@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_hccentro_de_beleza_tela5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.HCCentroDeBelezaTela2">
+    android:orientation="vertical"
+    tools:context="victorflvioexamplecom.hccentrodebeleza.activity.HCCentroDeBelezaTela5">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_main"
@@ -14,13 +16,12 @@
         android:minHeight="?attr/actionBarSize" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvListTela2"
+        android:id="@+id/rvListTela5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingEnd="2dp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        android:paddingStart="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tb_main" />
+        android:paddingStart="2dp" />
 
-</RelativeLayout>
+</LinearLayout>
