@@ -89,4 +89,18 @@ public class Database {
         mReservas.add(position, reserva);
         mRealm.commitTransaction();
     }
+
+    public void deleteReserva(int position, long id, RealmList<Reserva> mReservas) {
+        mRealm.beginTransaction();
+        Reserva reserva = mRealm.where(Reserva.class)
+                .equalTo("id", id)
+                .findFirst();
+        mReservas.remove(position);
+        reserva.deleteFromRealm();
+        mRealm.commitTransaction();
+    }
+
+    public boolean isEmptyReserva(long id) {
+        return getReservas(id).isEmpty();
+    }
 }

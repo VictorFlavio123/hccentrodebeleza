@@ -1,5 +1,6 @@
 package victorflvioexamplecom.hccentrodebeleza.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,14 +54,14 @@ public class HCCentroDeBelezaTela5 extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            startActivity(new Intent(HCCentroDeBelezaTela5.this, HCCentroDeBelezaTela2.class));
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        finish();
+        startActivity(new Intent(HCCentroDeBelezaTela5.this, HCCentroDeBelezaTela2.class));
         super.onBackPressed();
     }
 }

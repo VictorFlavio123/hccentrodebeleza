@@ -2,6 +2,7 @@ package victorflvioexamplecom.hccentrodebeleza.activity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -131,7 +132,7 @@ public class HCCentroDeBelezaTela4 extends AppCompatActivity implements View.OnC
                     } else {
                         Database.getInstance().makeReservation(reserva, id);
                     }
-                    finish();
+                    startActivity(new Intent(HCCentroDeBelezaTela4.this, HCCentroDeBelezaTela5.class));
                 }
                 break;
         }
@@ -141,14 +142,23 @@ public class HCCentroDeBelezaTela4 extends AppCompatActivity implements View.OnC
         edtHoraReservada.setOnClickListener(this);
         final Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
+        final int minute = calendar.get(Calendar.MINUTE);
         mTimePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                if (selectedMinute <= 0 || selectedMinute < 10) {
-                    edtHoraReservada.setText(selectedHour + ":" + "0" + selectedMinute);
-                } else {
-                    edtHoraReservada.setText(selectedHour + ":" + selectedMinute);
+                if (selectedHour >= 0 || selectedHour < 10) {
+                    if (selectedMinute >= 0 && selectedMinute < 10) {
+                        edtHoraReservada.setText("0" + selectedHour + ":" + "0" + selectedMinute);
+                    } else {
+                        edtHoraReservada.setText("0" + selectedHour + ":" + selectedMinute);
+                    }
+                }
+                if (selectedHour > 10) {
+                    if (selectedMinute >= 0 && selectedMinute < 10) {
+                        edtHoraReservada.setText(selectedHour + ":" + "0" + selectedMinute);
+                    } else {
+                        edtHoraReservada.setText(selectedHour + ":" + selectedMinute);
+                    }
                 }
             }
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import victorflvioexamplecom.hccentrodebeleza.R;
 import victorflvioexamplecom.hccentrodebeleza.adapters.PrecosAdapter;
+import victorflvioexamplecom.hccentrodebeleza.database.Database;
 import victorflvioexamplecom.hccentrodebeleza.extras.SavedSharedPreferences;
 import victorflvioexamplecom.hccentrodebeleza.interfaces.RecyclerViewOnClickListenerHack;
 import victorflvioexamplecom.hccentrodebeleza.model.Servicos;
@@ -41,6 +42,9 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hccentro_de_beleza_tela2);
+
+        //REALM
+        Database.getInstance().setContext(this);
 
         //TOOLBAR
         mToolbar = (Toolbar) findViewById(R.id.tb_main);
@@ -64,7 +68,8 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
 
         String nomeUsuario = SavedSharedPreferences.getNomeUsuario(this);
         String emailUsuario = SavedSharedPreferences.getEmailUsuario(this);
-        boolean usuarioCadastrado = SavedSharedPreferences.getUsuarioCadastrado(this);
+        final boolean usuarioCadastrado = SavedSharedPreferences.getUsuarioCadastrado(this);
+        final long id = SavedSharedPreferences.getIdUsuario(this);
 
         //Log.i("TAG", usuarioCadastrado + "");
 
@@ -122,10 +127,19 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
                                 mDrawer.closeDrawer();
                                 break;
                             case 2:
+                                //IMPLICITA
                                 startActivity(new Intent(HCCentroDeBelezaTela2.this, HCCentroDeBelezaTela3.class));
                                 break;
                             case 3:
-                                startActivity(new Intent(HCCentroDeBelezaTela2.this, HCCentroDeBelezaTela5.class));
+                                if (usuarioCadastrado) {
+                                    if (!Database.getInstance().isEmptyReserva(id)) {
+                                        startActivity(new Intent(HCCentroDeBelezaTela2.this, HCCentroDeBelezaTela5.class));
+                                    } else {
+                                        Toast.makeText(HCCentroDeBelezaTela2.this, "Esse usuario não possui reserva!", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(HCCentroDeBelezaTela2.this, "Você não possui cadastro!", Toast.LENGTH_SHORT).show();
+                                }
                                 break;
                             case 5:
                                 startActivity(new Intent(HCCentroDeBelezaTela2.this, MapsActivity.class));
@@ -203,6 +217,7 @@ public class HCCentroDeBelezaTela2 extends AppCompatActivity implements Recycler
         boolean usuarioCadastrado = SavedSharedPreferences.getUsuarioCadastrado(this);
 
         if(usuarioCadastrado) {
+            //EXPLICITO
             SavedSharedPreferences.setNomeServico(this, mPrecosAdapter.returnNome(position));
             startActivity(new Intent(this, HCCentroDeBelezaTela4.class));
         } else {

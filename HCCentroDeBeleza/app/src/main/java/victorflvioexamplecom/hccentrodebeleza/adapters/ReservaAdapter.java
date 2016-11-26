@@ -1,5 +1,6 @@
 package victorflvioexamplecom.hccentrodebeleza.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import io.realm.RealmList;
 import victorflvioexamplecom.hccentrodebeleza.R;
 import victorflvioexamplecom.hccentrodebeleza.activity.HCCentroDeBelezaTela4;
+import victorflvioexamplecom.hccentrodebeleza.database.Database;
 import victorflvioexamplecom.hccentrodebeleza.extras.SavedSharedPreferences;
 import victorflvioexamplecom.hccentrodebeleza.model.Reserva;
 
@@ -43,6 +45,10 @@ public class ReservaAdapter extends RecyclerView.Adapter<ReservaAdapter.ReservaV
         return mReservas.size();
     }
 
+    private long returnID(int position) {
+        return mReservas.get(position).getId();
+    }
+
     public class ReservaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvNomeServico, tvData, tvHorario;
@@ -70,8 +76,16 @@ public class ReservaAdapter extends RecyclerView.Adapter<ReservaAdapter.ReservaV
                     mContext.startActivity(new Intent(mContext, HCCentroDeBelezaTela4.class)
                             .putExtra("editar", true)
                             .putExtra("position", getAdapterPosition()));
+                    notifyDataSetChanged();
+                    notifyItemChanged(getAdapterPosition());
                     break;
                 case R.id.ibDeletarReserva:
+                    long id = SavedSharedPreferences.getIdUsuario(mContext);
+                    Database.getInstance().deleteReserva(getAdapterPosition(), returnID(getAdapterPosition()), mReservas);
+                    notifyItemRemoved(getAdapterPosition());
+                    if (Database.getInstance().isEmptyReserva(id)) {
+                        ((Activity) mContext).finish();
+                    }
                     break;
             }
         }
